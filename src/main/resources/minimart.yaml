@@ -1,0 +1,22 @@
+# Define routing rules
+---
+providers:
+  - id: stat
+    path: "/stationary"
+    items:
+      - book
+      - scissor
+      - ruler
+      - eraser
+  - id: beverage
+    path: "/bev"
+    items:
+      - beer
+      - wine
+server:
+  httpport: 8001
+  kafkaserver: 127.0.0.1
+  kafkaport: 9092
+  clientgroup: group_test
+  topics:
+    - first_topic

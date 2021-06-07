@@ -1,0 +1,26 @@
+dev: true
+service:
+  type: NodePort
+  ports:
+    http_port: 30841
+    debug_port: 30842
+deployment:
+  replicas: 1
+  strategy: {}
+  affinity: {}
+  nodeSelector: {}
+  tolerations: []
+  resources:
+    limits:
+      memory: 512Mi
+    requests:
+      memory: 100Mi
+      cpu: 100m
+apps:
+  httpport: 8002
+  rest:
+    stat: "/minimart-stat"
+    bev: "/minimart-bev"
+
+
+image: samutup/minimart:0.1
