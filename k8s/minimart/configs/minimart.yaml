@@ -14,5 +14,5 @@ providers:
       - beer
       - wine
 server:
-    httpport: {{ include "{{ .Chart.Name }}.port" . }}
+    httpport: {{ .Values.apps.httpport }}
 

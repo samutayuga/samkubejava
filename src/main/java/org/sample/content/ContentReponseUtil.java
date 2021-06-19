@@ -58,16 +58,17 @@ public class ContentReponseUtil {
   }
 
 
-  public static Handler<RoutingContext> handleRequest(ContentSettings contentSettings,
-      KafkaConsumer<String, String> kafkaConsumer, KafkaProducer<String, String> kafkaProducer) {
+  public static Handler<RoutingContext> handleRequest(ContentSettings contentSettings) {
     return rc -> {
       //TODO: input validation
       //Map<String, String> paths = rc.get(AtmConfig.PATHS.configVal);
       String uri = rc.request().uri();
 
       if (HttpMethod.POST.equals(rc.request().method())) {
-        handlePost(contentSettings, uri, rc, kafkaProducer);
+        //handlePost(contentSettings, uri, rc, kafkaProducer);
         //call kafka producer
+        rc.response().setStatusCode(HttpResponseStatus.BAD_REQUEST.code())
+            .end(ContentReponseUtil.toJsonString(contentSettings.getAtmProviders()));
       } else if (HttpMethod.GET.equals(rc.request().method())) {
         Optional<ContentSupplier> atmProviderOptional = contentSettings.getAtmProviders().stream()
             .filter(p -> p.getPath().equals(uri)).findFirst();

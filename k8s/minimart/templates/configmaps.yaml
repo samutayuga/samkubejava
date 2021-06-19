@@ -2,7 +2,6 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: {{ include "{{ .Chart.Name }}.fullname" . }}
-{{ include "{{ .Chart.Name }}.labels" . | indent 2 }}
+  name: {{ .Chart.Name }}
 data:
 {{ tpl ((.Files.Glob "configs/*").AsConfig) . | indent 2 }}

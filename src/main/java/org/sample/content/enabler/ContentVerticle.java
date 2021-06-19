@@ -83,13 +83,13 @@ public class ContentVerticle extends AbstractVerticle {
       String bootstrapServer = String
           .format("%s:%s", contentSettings.getAtmServerSettings().getKafkaserver(),
               contentSettings.getAtmServerSettings().getKafkaport());
-      KafkaConsumer<String, String> kafkaConsumer = kafkaConsumerBuilder(bootstrapServer,
+      /*KafkaConsumer<String, String> kafkaConsumer = kafkaConsumerBuilder(bootstrapServer,
           contentSettings.getAtmServerSettings().getClientgroup(), vertx)
           .handler(recordConsumer::accept);
-      KafkaProducer<String,String> kafkaProducer=kafkaProducerBuilder(vertx,bootstrapServer);
+      KafkaProducer<String,String> kafkaProducer=kafkaProducerBuilder(vertx,bootstrapServer);*/
       contentSettings.getAtmProviders()
           .forEach(js -> router.route().handler(BodyHandler.create()).blockingHandler(
-              handleRequest(contentSettings, kafkaConsumer,kafkaProducer)));
+              handleRequest(contentSettings)));
       // create server
       HttpServer server = vertx.createHttpServer();
       server.requestHandler(router).listen(portNumber, serverStartupListenHandler);

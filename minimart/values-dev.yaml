@@ -1,5 +1,0 @@
-apps:
-  httpport: 8002
-  rest:
-    stat: "/hello1"
-    bev: "/hello2"
